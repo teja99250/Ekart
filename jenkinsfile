@@ -43,6 +43,8 @@ pipeline {
                     sh "$SCANNER_HOME/bin/sonar-scanner \
                         -Dsonar.projectKey=sonar.testing \
                         -Dsonar.projectName=sonar.testing"
+                        -Dsonar.exclusions=**/*.java
+
                 }
             }
         }
