@@ -4,7 +4,7 @@ pipeline {
     tools {
         // Define Maven and JDK tools
         maven 'maven' // Use 'maven' instead of 'maven3' if that's the configured tool name
-        jdk 'jdk' // Use 'jdk' instead of 'jdk17' if that's the configured tool name
+        jdk 'JDK' // Use 'jdk' instead of 'jdk17' if that's the configured tool name
         // Define SonarQube Scanner tool
         
     }
