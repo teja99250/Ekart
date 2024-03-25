@@ -1,0 +1,57 @@
+pipeline {
+    agent any
+    
+    tools {
+        // Define Maven and JDK tools
+        maven 'maven' // Use 'maven' instead of 'maven3' if that's the configured tool name
+        jdk 'jdk' // Use 'jdk' instead of 'jdk17' if that's the configured tool name
+        // Define SonarQube Scanner tool
+        
+    }
+    
+    environment {
+        // Define environment variable for SonarScanner
+        SCANNER_HOME = tool 'SonarQubeScanner'
+    }
+
+    stages {
+        stage('Git checkout') {
+            steps {
+                // Checkout code from Git
+                git branch: 'main', url: 'https://github.com/teja99250/Ekart.git' 
+            }
+        }
+        
+        stage('Compile') {
+            steps {
+                // Compile the Maven project
+                sh 'mvn compile'
+            }
+        }
+        
+        stage('Unit Test') {
+            steps {
+                // Run unit tests (assuming you meant 'mvn test')
+                sh 'mvn test -DskipTests=true'
+            }
+        }
+        
+        stage('SonarQube Analysis') {
+            steps {
+                // Run SonarQube analysis
+                withSonarQubeEnv(credentialsId: 'squ_5fe55b099fe0087eb65e413f32ad34abb39d9d4e', installationName: 'SonarQubeScanner') {
+                    sh "$SCANNER_HOME/bin/sonar-scanner \
+                        -Dsonar.projectKey=sonar.testing \
+                        -Dsonar.projectName=sonar.testing"
+                }
+            }
+        }
+        
+        stage('Hello') {
+            steps {
+                // Print 'Hello World'
+                echo 'Hello World'
+            }
+        }
+    }
+}
