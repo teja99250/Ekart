@@ -39,7 +39,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 // Run SonarQube analysis
-                withSonarQubeEnv(credentialsId: 'squ_5fe55b099fe0087eb65e413f32ad34abb39d9d4e', installationName: 'SonarQubeScanner') {
+                withSonarQubeEnv(credentialsId: 'squ_4010feebd1fb7304240081a4cec99a94b1a76091', installationName: 'SonarQubeScanner') {
                     sh "$SCANNER_HOME/bin/sonar-scanner \
                         -Dsonar.projectKey=sonar.testing \
                         -Dsonar.projectName=sonar.testing"
